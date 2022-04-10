@@ -71,6 +71,7 @@ jar {
     include '**/*'
     into pathToNativeInJar
   }
+  archiveClassifier='JDK1.8'
   manifest {
     attributes(
         'Build-Timestamp': new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date()),
