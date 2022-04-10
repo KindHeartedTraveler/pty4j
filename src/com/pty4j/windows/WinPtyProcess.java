@@ -3,6 +3,7 @@ package com.pty4j.windows;
 import com.pty4j.PtyProcess;
 import com.pty4j.PtyProcessOptions;
 import com.pty4j.WinSize;
+import com.pty4j.util.AdaptJDK8Util;
 import com.sun.jna.platform.win32.Advapi32Util;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -10,9 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author traff
@@ -71,7 +70,7 @@ public class WinPtyProcess extends PtyProcess {
                           boolean consoleMode,
                           boolean enableAnsiColor) throws IOException {
         myConsoleMode = consoleMode;
-        myCommand = List.of(command);
+        myCommand = AdaptJDK8Util.arrayToList(command);
         try {
             myWinPty = new WinPty(joinCmdArgs(command), workingDirectory, environment, consoleMode,
                                   initialColumns, initialRows, enableAnsiColor);

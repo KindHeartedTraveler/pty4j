@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class UnixPtyProcess extends PtyProcess {
   private static final int NOOP = 0;
@@ -58,7 +57,12 @@ public class UnixPtyProcess extends PtyProcess {
     myConsoleMode = consoleMode;
     myPty = new Pty(consoleMode, options.isUnixOpenTtyToPreserveOutputAfterTermination());
     myErrPty = options.isRedirectErrorStream() ? null : (consoleMode ? new Pty() : null);
-    String dir = Objects.requireNonNullElse(options.getDirectory(), ".");
+    String dir;
+    if (options.getDirectory() == null) {
+      dir = ".";
+    } else {
+      dir = options.getDirectory();
+    }
     execInPty(options.getCommand(), PtyUtil.toStringArray(options.getEnvironment()), dir, myPty, myErrPty,
       options.getInitialColumns(), options.getInitialRows());
   }

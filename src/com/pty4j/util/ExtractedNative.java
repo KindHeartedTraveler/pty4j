@@ -70,8 +70,8 @@ class ExtractedNative {
 
   private void init() {
     try {
-      myResourceOsArchSubPath = Objects.requireNonNullElse(myResourceOsArchSubPath, PtyUtil.getNativeLibraryOsArchSubPath());
-      myResourceNamePrefix = Objects.requireNonNullElse(myResourceNamePrefix, DEFAULT_RESOURCE_NAME_PREFIX);
+      myResourceOsArchSubPath = myResourceOsArchSubPath != null ? myResourceOsArchSubPath : PtyUtil.getNativeLibraryOsArchSubPath();
+      myResourceNamePrefix = myResourceNamePrefix != null ? myResourceNamePrefix : DEFAULT_RESOURCE_NAME_PREFIX;
       synchronized (this) {
         if (!myInitialized) {
           doInit();

@@ -54,8 +54,8 @@ test {
 }
 
 compileJava {
-  sourceCompatibility = '11'
-  targetCompatibility = '11'
+  sourceCompatibility = '1.8'
+  targetCompatibility = '1.8'
   options.debugOptions.debugLevel = 'lines,vars,source'
 }
 
@@ -75,8 +75,9 @@ jar {
     attributes(
         'Build-Timestamp': new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date()),
         'Created-By': "Gradle ${gradle.gradleVersion}",
-        'Build-Jdk': "${System.properties['java.runtime.version']}",
-        'Build-OS': "${System.properties['os.name']} ${System.properties['os.arch']} ${System.properties['os.version']}"
+        'Build-Jdk': "1.8",
+        'Build-OS': "${System.properties['os.name']} ${System.properties['os.arch']} ${System.properties['os.version']}",
+        'Comment':'Built by jdk 1.8 instead of 11'
     )
   }
 }
